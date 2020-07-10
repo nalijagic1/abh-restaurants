@@ -10,8 +10,9 @@ public class LoginPage extends PageBase {
     final static private String PAGE_URL_REGEX = "\\/login\\d*";
     final static private String CREATE_ACCOUNT_BUTTON_CSS = "form[class = 'login-register-form'] div h5 a[href= '/register']";
     final static private String EMAIL_INPUT_FIELD_CSS = "div[class='row'] input[id='email']";
-    final static private String PASSWORD_INPUT_FIELD_CSS = "div[class='row'] input[id='passwrd']";
+    final static private String PASSWORD_INPUT_FIELD_CSS = "div[class='row'] input[id='password']";
     final static private String LOGIN_BUTTON_CSS = "div[class='row'] div button[type='submit']";
+    final static private String ERROR_MESSAGE_CSS ="div[class='row'] p[class='error-message']";
 
     public LoginPage(WebDriver driver) {
         super(driver, PAGE_URL_REGEX);
@@ -30,6 +31,9 @@ public class LoginPage extends PageBase {
     @FindBy(css = LOGIN_BUTTON_CSS)
     private WebElement loginButton;
 
+    @FindBy(css = ERROR_MESSAGE_CSS)
+    private WebElement errorMessage;
+
     public WebElement getCreateAccountButton(){
         return createAccountButton;
     }
@@ -45,6 +49,10 @@ public class LoginPage extends PageBase {
         return loginButton;
     }
 
+    public WebElement getErrorMessage() {
+        return errorMessage;
+    }
+
     public Registration clickRegisterButton(){
         getCreateAccountButton().click();
         return new Registration(getDriver());
@@ -57,5 +65,14 @@ public class LoginPage extends PageBase {
         return new HomePage(getDriver());
     }
 
+    public boolean checkForError(String expected){
+        return expected.equals(getErrorMessage().getText());
+    }
+
+    public void deleteInput(){
+        getEmailInputField().clear();
+        getPasswordInputField().clear();
+
+    }
 
 }

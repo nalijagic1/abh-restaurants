@@ -15,7 +15,7 @@ public class Registration extends PageBase {
     final static private String PASSWORD_FIELD_CSS = "form[class = 'login-register-form'] div[class = 'row'] div input[placeholder= 'Password']";
     final static private String CONFIRM_PASSWORD_CSS = "form[class = 'login-register-form'] div[class = 'row'] div input[placeholder= 'Confirm Password']";
     final static private String CONFIRM_REGISTRATION_BUTTON_CSS = "div[class='row'] div button[type='submit']";
-
+    final static private String ERROR_MESSAGE_CSS = "div[class='row'] p[class='error-message']";
     public Registration(WebDriver driver) {
         super(driver, PAGE_URL_REGEX);
         initElements();
@@ -45,6 +45,9 @@ public class Registration extends PageBase {
     @FindBy(css = CONFIRM_REGISTRATION_BUTTON_CSS)
     private WebElement confirmRegistrationButton;
 
+    @FindBy(css = ERROR_MESSAGE_CSS)
+    private WebElement errorText;
+
     public WebElement getFirstNameInputField() {
         return firstNameInputField;
     }
@@ -64,6 +67,10 @@ public class Registration extends PageBase {
     public WebElement getAddressInputField() {
         return addressInputField;
 
+    }
+
+    public WebElement getErrorText() {
+        return errorText;
     }
 
     public WebElement getPasswordField() {
@@ -89,5 +96,8 @@ public class Registration extends PageBase {
         getConfirmRegistrationButton().click();
         return new HomePage(getDriver());
 
+    }
+    public boolean checkForError(String expected){
+        return expected.equals(getErrorText().getText());
     }
 }

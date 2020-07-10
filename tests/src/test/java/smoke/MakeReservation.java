@@ -42,7 +42,7 @@ public class MakeReservation extends TestBase {
     @Test(priority = 3)
     public void checkUserIsRegistered(){
         Assert.assertTrue(new HomePage(driver)
-        .checkMainText(HEADER_TEXT));
+                .checkMainText(HEADER_TEXT));
     }
 
     @Test(priority = 4)
@@ -55,6 +55,7 @@ public class MakeReservation extends TestBase {
     public void logOut() {
         new UserDetails(driver)
                 .clickLogoutButton();
+        driver.get("https://abh-restaurants-dev-days.herokuapp.com/");
     }
 
     @Test(priority = 6)

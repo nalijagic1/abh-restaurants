@@ -33,12 +33,16 @@ public class DriverSupport {
             options.addArguments("--start-maximized");
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("acceptInsecureCerts",true);
+            System.setProperty("webdriver.gecko.driver",
+                    "C:\\Users\\User\\Downloads\\geckodriver-v0.26.0-win64\\geckodriver.exe");
             driver = new FirefoxDriver(capabilities);
 
         } else if (browser.equals("chrome")) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("headless");
             options.addArguments("window-size=1200x600");
+            System.setProperty("webdriver.chrome.driver",
+                    "C:\\Users\\User\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
             driver = new ChromeDriver();
         } else if (browser.equals("safari")) {
             SafariOptions safariOptions = new SafariOptions();
